@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -54,7 +56,7 @@ public class ScienceResearchGerryMandeering extends JFrame implements ActionList
 			add(myTextField);
 			 
 			setResizable(true); // makes the frame unresizable 
-			pack(); // sets the frame to the preferred size 
+			setSize(500, 500); // sets the frame to the preferred size 
 			 setVisible(true); // makes the frame visible
 		 /*
 		  * EXAMPLE ON HOW TO GOOGLE SEARCH
@@ -90,8 +92,29 @@ public class ScienceResearchGerryMandeering extends JFrame implements ActionList
 		
 	}
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
+		/*
+		This thing has been depricated and is no longer usable... I think, on to java.net
+		String google = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=";
+		String search = myTextField.getText();
+		String charset = "UTF-8"; // ask what this does
+		try {
+			URL url = new URL(google + URLEncoder.encode(search, charset));
+			try {
+				Reader reader = new InputStreamReader(url.openStream(), charset);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		GoogleResults results = new Gson().fromJson(reader, GoogleResults.class);
+		System.out.println(results.getResponseData().getResults.get(0).getTitle());
+		System.out.println(results.getResponseData.getResults.get(0).getURL());
+		*/
 		
 	}
 
