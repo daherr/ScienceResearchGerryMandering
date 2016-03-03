@@ -4,6 +4,9 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import javax.swing.*;
+import org.jsoup.*;
+import org.jsoup.nodes.*;
+import org.jsoup.select.*;
 
 
 /**
@@ -54,7 +57,7 @@ public class ScienceResearchGerryMandeering extends JFrame implements ActionList
 			layout.setConstraints(myTextField, c); // text field constraints
 			myTextField.setEditable(true); // makes the text field not editable 
 			add(myTextField);
-			 
+			myTextField.addActionListener(this);
 			setResizable(true); // makes the frame unresizable 
 			setSize(500, 500); // sets the frame to the preferred size 
 			 setVisible(true); // makes the frame visible
@@ -94,27 +97,55 @@ public class ScienceResearchGerryMandeering extends JFrame implements ActionList
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		/*
-		This thing has been depricated and is no longer usable... I think, on to java.net
-		String google = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=";
-		String search = myTextField.getText();
-		String charset = "UTF-8"; // ask what this does
+String google = "http://www.google.com/search?q=";
+String search = "stackoverflow";
+String charset = "UTF-8";
+String userAgent = "ExampleBot 1.0 (+http://example.com/bot)"; // Change this to your company's name and bot homepage!
+
+Elements links = Jsoup.connect(google + URLEncoder.encode(search, charset)).userAgent(userAgent).get().select(".g>.r>a");
+
+for (Element link : links) {
+    String title = link.text();
+    String url = link.absUrl("href"); // Google returns URLs in format "http://www.google.com/url?q=<url>&sa=U&ei=<someKey>".
+    url = URLDecoder.decode(url.substring(url.indexOf('=') + 1, url.indexOf('&')), "UTF-8");
+
+    if (!url.startsWith("http")) {
+        continue; // Ads/news/etc.
+    }
+
+    System.out.println("Title: " + title);
+    System.out.println("URL: " + url);
+}
+		*/
+	String google = "http://www.google.com/search?q=";
+	String search = myTextField.getText();
+	String charset = "UTF-8";
+	String userAgent = "Science Research SJHS (herr.david@rocketmail.com)";
+	
+	Elements links = null;
+	try {
+		links = Jsoup.connect(google + URLEncoder.encode(search, charset)).userAgent(userAgent).get().select(".g>.r>a");
+	} catch (UnsupportedEncodingException e2) {
+		e2.printStackTrace();
+	} catch (IOException e2) {
+		e2.printStackTrace();
+	}
+	
+	for(Element link : links){
+		String title = link.text();
+		String url = link.absUrl("href");
 		try {
-			URL url = new URL(google + URLEncoder.encode(search, charset));
-			try {
-				Reader reader = new InputStreamReader(url.openStream(), charset);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
+			url = URLDecoder.decode(url.substring(url.indexOf('=') + 1, url.indexOf('&')), "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
+		};
+		if(!url.startsWith("http")){
+			continue;
 		}
-		GoogleResults results = new Gson().fromJson(reader, GoogleResults.class);
-		System.out.println(results.getResponseData().getResults.get(0).getTitle());
-		System.out.println(results.getResponseData.getResults.get(0).getURL());
-		*/
+		
+		System.out.println("Title: " + title);
+		System.out.println("Url: " + url);
+	}
 		
 	}
 
