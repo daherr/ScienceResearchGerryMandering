@@ -26,7 +26,9 @@ public class ScienceResearchGerryMandeering extends JFrame implements ActionList
 	private GridBagLayout layout;
 	private JTextField myTextField; // variable for text box
 	
-	
+	/*
+	 * Open in project explorer, 
+	 */
 	/**
 	 * @param args
 	 */
